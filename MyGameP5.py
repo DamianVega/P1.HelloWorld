@@ -20,6 +20,14 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Budget Asteroids!")
 clock = pygame.time.Clock()
 
+font_name = pygame.font.match_font('arial')
+def draw_text(surf, text, size, x, y):
+    font = pygame.font.Font(font_name, size)
+    text_surface = font.render(text, True, WHITE)
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (x, y)
+    surf.blit(text_surface, text_rect)
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -88,7 +96,7 @@ mobs = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
 player = Player()
 all_sprites.add(player)
-for i in range(8):
+for i in range(30):
     m = Mob()
     all_sprites.add(m)
     mobs.add(m)
@@ -96,6 +104,8 @@ score = 0
 
 # Game loop
 running = True
+
+
 while running:
     # keep loop running at the right speed
     clock.tick(FPS)
@@ -114,7 +124,7 @@ while running:
     # check to see if a bullet hit a mob
     hits = pygame.sprite.groupcollide(mobs, bullets, True, True)
     for hit in hits:
-        score += 50 - hit.radius
+        score += 10
         m = Mob()
         all_sprites.add(m)
         mobs.add(m)
@@ -127,7 +137,7 @@ while running:
     # Draw / render
     screen.fill(BLACK)
     all_sprites.draw(screen)
-    draw_text(screen, str(score), 18, WIDTH / 2, 10)
+    draw_text(screen, str(score), 80, WIDTH / 2, 10)
     # *after* drawing everything, flip the display
     pygame.display.flip()
 
