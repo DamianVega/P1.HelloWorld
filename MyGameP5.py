@@ -39,7 +39,7 @@ def newmob():
 def draw_shield_bar(surf, x, y, pct):
     if pct < 0:
         pct = 0
-    BAR_LENGTH = 300
+    BAR_LENGTH = 150
     BAR_HEIGHT = 20
     fill = (pct / 100) * BAR_LENGTH
     outline_rect = pygame.Rect(x, y, BAR_LENGTH, BAR_HEIGHT)
